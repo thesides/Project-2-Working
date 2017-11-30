@@ -1,102 +1,154 @@
 $(document).ready(function(){
-//Post Logic
-	var newPost = function (body, StoryId) {
-		this.body = body;
-		this.StoryId = StoryId;
+
+	//Add a new user button listen for when a new user is submitted
+	$("#signUpSubmit").on("click", handleNewUserSubmit);
+
+	//click listener for create a story button
+	$("#createStory").on("click", handleNewStorySubmit);
+
+	//click listener for retrieve all stories button
+	//$("#getStories").on("click", getAllStories);
+
+	//click listener for create new post for existing story button
+	$("#createPost").on("click", handleNewPostSubmit);
+
+	////////////////////////////
+	//click listeners go here//
+	//////////////////////////
+
+	function handleNewStorySubmit (event) {
+		event.preventDefault();
+
+		//if there is no title or initial post then, return
+		if (!$("#newTitle").val().trim() || !$("#firstPost").val().trim()) {
+	      return;
+	    }
+
+	    	//new story title ask
+			var newStoryTitle = $("#newTitle").val().trim();
+			
+			//first post body text ask
+			var postBody = $("#firstPost").val().trim();
+
+			//call the create story ajax call function below; passing in the title and initial post (postBody) as the data to send off
+			createNewStory(newStoryTitle, 1, postBody);
 	};
 
-	$(function(){
-
-		var storyId = require("./crm.js");
-
-		$("#createPost").on("click", function (event){
-
-			event.preventDefault();
+	function createNewStory (title, userId, firstPost) {
+		//Add a new story thread when user clicks create story button
 			
-			$("#createPost").on("click", function (event) {
+			//sends new story title to db and gets back a story id to pass to the post
+			$.ajax("/api/story", {
+				type: "POST",
+				data: {
+					storyName: title,
+					UserId: userId
+				}
+			}).done(function(dataSent){
+				
+				//grab the story id so it can be sent to the post table with the body of the first post
+				var storyId = dataSent.id
 
-				var postBody = $("#newPost").val().trim();
-				var story = storyId.storyId;
-
-				var newPost = new newPost (postBody, story);
-
+				//ajax post request gets sent out along the /api/post route
 				$.ajax("/api/post", {
 					type: "POST",
-					data: newPost
-				}).done(function (data) {
+					data: {
+						body: firstPost,
+						StoryId: storyId,
+						UserId: userId
+					}
+				}).then(function(data){
+					console.log(data)
+
+					getAllStories();
+					//after a story is created take us to the create new post page
+					window.location.href = "/loggedInUserView";
+					
+				});
+			});
+	};
+
+	function handleNewPostSubmit (event) {
+		event.preventDefault();
+
+		//if the post is empty return
+		if (!$("#newPost").val().trim()) {
+	      return;
+	    }
+	    	//grabs the text in the new post field
+	    	var postBody = $("#newPost").val().trim();
+
+	    	var storyId; //grab this from handlebars data element when clicked
+
+	    	var userId; //grab this from the handlebars data element when clicked
+
+	    	//call function to send ajax call creating new post with postBody as the data being sent
+	    	createNewPost(postBody, 1, 1); // the 1's are hard coded and will be replaced with handlbar click listeners
+
+	};
+
+	function createNewPost (postBody, storyId, userId) {
+		$.ajax("/api/post", {
+					type: "POST",
+					data: {
+						body: postBody,
+						StoryId: storyId,
+						UserId: userId
+					}
+				}).then(function (data) {
 
 				//call get all posts
 				console.log(data);
-				window.location.href = "/post";
+				//window.location.href = "/";
 				});
-			});
+	};
 
+	function getAllStories (){
+		//ajax get request to retrieve all stories and their posts
+		$.get("/api/story", function (data){
+			console.log(data);
 		});
-	});
+	};
 
-//Story Logic
-var storyId;
 
-$(function(){
-
-	//Add a new story thread when user clicks create story button
-	$("#createStory").on("click", function (event) {
-
+//Function for User Creation
+	function handleNewUserSubmit () {
 		event.preventDefault();
 
-		//new story title ask
-		var newStory = {
-			storyName: $("#newTitle").val().trim(),
-		}
+		//if they didn't enter anything, return
+		if (!$("#usernameSignUp").val().trim()) {
+	      return;
+	    };
 
-		//first post body text ask
-		var postBody = $("#firstPost").val().trim()
+		//grabs new user info and creates in users table of DB
+		var newUser = {
+			name: $("#usernameSignUp").val().trim(),
+			email: $("#emailSignUp").val().trim(),
+			password: $("#passwordSignUp").val().trim()
+		};
 		
-		//sends new story title to Story Table in DB; this title gets a Story ID
-		$.ajax("/api/story", {
-			type: "POST",
-			data: newStory
-		}).done(function(data){
-			
-			console.log(data);
-			
-			//grab the story id so it can be sent to the post table with the body of the first post
-			storyId = data.id
-			
-			//post request includes body of post and StoryId the post goes with
-			var newPost = {
-				body: postBody,
-				StoryId: storyId
-			}
+		//call create user function below
+		createUser(newUser);
+	}
 
-			console.log(newPost);
-
-			//ajax post request gets sent out along the /api/post route
-			$.ajax("/api/post", {
+	function createUser (newUser) {
+		//sends ajax call along route /api/newuser; data being sent is what is passed in for newUser
+		$.ajax("/api/newuser", {
 				type: "POST",
-				data: newPost
-			}).then(function(data){
-				console.log(data)
-
-				//reload the create story page when done
-				window.location.href = "/post";
-				//export the storyID so it can be accessed in the post.js file
-				module.exports.storyId = storyId;
+				data: newUser
+			}).then(function(dataSent){
+				console.log(dataSent);
+				window.location.href = "/user";
 			});
+	}
+
+	function getAllUsers () {
+		//ajax get request to retrieve all users
+		$.get("/api/allusers", function (dataSent){
+			console.log(dataSent);
 		});
-	});
+	}
 
-	//ajax get request to retrieve all stories and their posts
-	$("#getStories").on("click", function (event) {
-		$.get("/api/story", function (data){
-
-			//render results to page
-			console.log(data);
-
-		});
-	});
-
-});	
 
 
 });	
