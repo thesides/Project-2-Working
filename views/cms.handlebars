@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+	<div class="navbar-fixed">  
+		<nav>
+			<div class="nav-wrapper">
+				<a id="logo" class="brand-logo swap left" href="/ ">4 People 1 Story</a>
+				<ul id="nav-bar" class="right hide-on-med-and-down">
+					<li><a id="logout" href="#">Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container" id="maincontainer">
+		<div class="row">
+
+			<!-- Side Bar Nav -->
+			<div class="col s12 m4 l3">
+
+				<div class="row valign-wrapper">  
+					<div class="col s12">
+						<ul class="links">
+							<!-- Link for User to create New Post-->
+							<li><a class="toPosts" href="/">New Post</a></li>
+
+							<!-- Link for User to create New Story-->
+							<li><a class="toStories" href="/">New Story</a></li>
+
+							<!-- Link for User's Archived List of Stories-->
+							<li><a class="toArchived" href="/archive">Archive</a></li>
+						</ul>  
+					</div>
+				</div>                
+			</div>
+
+			<!-- Main Column -->
+			<div class="col s12 m8 l9">
+
+				{{!-- <!-- Post Form -->
+				<div class="row">
+					<div class="col s12">
+						<form class="create-form" id="cms-post" action="/api/post" method="POST"> 
+
+							<!-- Text Area -->
+							<div class="row">
+							  <div class="input-field col s12">
+							      <label for="firstPost">Post:</label>  
+							      <textarea id="firstPost" class="materialize-textarea" type="text"></textarea>
+							  </div> 
+							</div>  
+						</form>
+
+						<!-- Submit Button -->
+						<div class="row">
+						  <div class="input-field col s12">
+						    <button id="createPost" class="btn waves-effect waves-light" type="submit">Create Post</button> 
+						  </div>              
+						</div>
+
+					</div>	
+				</div> --}}
+
+				<hr>
+
+
+				<!-- Story Form -->
+				<div class="row">
+					<div class="col s12">
+						<form class="create-form" id="cms-story" action="/api/story" method="POST">
+							<!-- Text Area -->
+							<div class="row">
+							  <div class="input-field col s12">
+							  	<input id="newTitle" name="title" type="text" class="validate">
+	          					<label for="title">Title:</label>
+							  </div> 
+							</div>
+						</form>
+
+						<form class="create-form" id="firstPost" action="/api/post" method="POST">
+							<!-- Text Area -->
+							<div class="row">
+							  <div class="input-field col s12">
+							  	<input id="firstPost" name="title" type="text" class="validate">
+	          					<label for="title">First Post:</label>
+							  </div> 
+							</div>
+						</form> 
+
+						<!-- Submit Button -->
+						<div class="row">
+						  <div class="input-field col s12">
+						    <button id="createStory" class="btn waves-effect waves-light" type="submit">Create Story</button> 
+						  </div>              
+						</div>
+
+					</div>	     
+				</div>  
+
+				<hr>
+
+			</div>
+
+		</div>
+
+	</div>
+
+<script src="/js/cms.js"></script>	
+</body>	            	
