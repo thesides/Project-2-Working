@@ -16,6 +16,8 @@ module.exports = function (sequelize, DataTypes) {
 	//associating authors with their various story chains
 	User.associate = function (models) {
 		User.hasMany(models.Story);
+
+		//hasmany posts
 	};
 
 	return User;

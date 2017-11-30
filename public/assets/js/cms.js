@@ -31,10 +31,10 @@ $(document).ready(function(){
 			var postBody = $("#firstPost").val().trim();
 
 			//call the create story ajax call function below; passing in the title and initial post (postBody) as the data to send off
-			createNewStory(newStoryTitle, 1, postBody);
+			createNewStory(newStoryTitle, postBody);
 	};
 
-	function createNewStory (title, userId, firstPost) {
+	function createNewStory (title, firstPost, userId) {
 		//Add a new story thread when user clicks create story button
 			
 			//sends new story title to db and gets back a story id to pass to the post
@@ -42,7 +42,7 @@ $(document).ready(function(){
 				type: "POST",
 				data: {
 					storyName: title,
-					UserId: userId
+					//UserId: userId
 				}
 			}).done(function(dataSent){
 				
@@ -55,14 +55,14 @@ $(document).ready(function(){
 					data: {
 						body: firstPost,
 						StoryId: storyId,
-						UserId: userId
+						//UserId: userId
 					}
 				}).then(function(data){
 					console.log(data)
 
 					getAllStories();
 					//after a story is created take us to the create new post page
-					window.location.href = "/loggedInUserView";
+					window.location.href = "/user";
 					
 				});
 			});
@@ -105,8 +105,8 @@ $(document).ready(function(){
 
 	function getAllStories (){
 		//ajax get request to retrieve all stories and their posts
-		$.get("/api/story", function (data){
-			console.log(data);
+		$.get("/api/story", function (dataReceived){
+			console.log(dataReceived);
 		});
 	};
 
@@ -144,8 +144,8 @@ $(document).ready(function(){
 
 	function getAllUsers () {
 		//ajax get request to retrieve all users
-		$.get("/api/allusers", function (dataSent){
-			console.log(dataSent);
+		$.get("/api/allusers", function (dataReceived){
+			console.log(dataReceived);
 		});
 	}
 
