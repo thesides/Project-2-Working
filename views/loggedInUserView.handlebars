@@ -4,117 +4,111 @@
 </head>
 
 <body>
+  <!-- Navbar -->
   <div class="navbar-fixed">  
     <nav>
-      <div class="nav-wrapper">
-        <a id="logo" class="brand-logo swap left" href="/ ">4 People 1 Story</a>
-        <ul id="nav-bar" class="right hide-on-med-and-down">
-          <li><a id="logout" href="#">Logout</a></li>
-        </ul>
+      <div class="nav-wrapper cyan darken-2">
+        <a id="logo" class="brand-logo center white-text" href="/"><img id="logo-img" class="responsive-img" src="./assets/images/book.png"></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+        <!-- Links show on desktop -->
+        <ul class="right hide-on-med-and-down">
+          <li><a class="white-text" id="logout" href="#" >Logout</a></li>  
+        </ul>      
       </div>
     </nav>
   </div>
+  <!-- Navbar Links That Appear on Mobile Devices...outside of navbar-fixed to avoid nesting issues-->
+  <div>
+    <ul class="side-nav" id="mobile-demo">
+      <li><a class="white-text" id="logout" href="#" >Logout</a></li>
+    </ul>    
+  </div>    
 
-  <div class="container" id="maincontainer">
-    <div class="row">
+  <div class="row">
 
-      <!-- Side Bar Nav -->
-      {{#with loggedUser}}
+    <!-- Side Bar Nav -->
+{{!--       {{#with loggedUser}}
+--}}
+    <div class="col s12 m4 l3 valign-wrapper">
+          <ul>
+            <!-- Link for User to create New Story-->
+            <li><a class="toStories black-text" href="/">New Story</a></li>
+            <!-- Link for User's Archived List of Stories-->
+            <li><a class="toArchived black-text" href="/archive">Archive</a></li>
+          </ul>           
+    </div>      
 
-      <div class="col s12 m4 l3">
-        
-        <div class="row valign-wrapper">  
-          <div class="col s12">
-            <ul class="links">
-              <!-- Link for User to create New Post-->
-              <li><a class="toPosts" href="/">New Post</a></li>
-
-              <!-- Link for User to create New Story-->
-              <li><a class="toStories" href="/">New Story</a></li>
-
-              <!-- Link for User's Archived List of Stories-->
-              <li><a class="toArchived" href="/archive">Archive</a></li>
-            </ul>  
+    <!-- Main Column -->
+    <div class="col s12 m8 l9">
+      <!-- Welcome back message -->
+      <div class="row">
+        <div class="col s12">
+          <div id="username">
+            <h2> Welcome Back {{userName}}!</h2>
           </div>
-        </div>                
-      </div>      
-
-      <!-- Main Column -->
-      <div class="col s12 m8 l9">
-        <!-- Welcome back message -->
-        <div class="row">
-          <div class="col s12">
-            <div id="username">
-              <h2> Welcome Back {{userName}}!</h2>
-            </div>
-          </div>    
-        </div>
-
-        <hr>
-        
-        {{/with}}       
-
-        <!-- Urban Dictionary API -->
-        <div class="row">
-          <div class="col s12 urban-dictionary-container">
-            <div id="urban">
-            </div>  
-          </div>
-        </div>     
-
-        <!-- table of currently active stories -->
-        <div class="row">
-          <div class="col s12">
-
-            {{#each userStories}}
-            {{#unless archived}}
-            <div class="row">
-              <div class="col s12 current-stories-container">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">{{this.title}}</span>
-                    <p><span class="first-story-post">{{this.post}}</span></p>
-                  </div>    
-                  <div class="card-action">
-                    <a class="" href="">Post</a>
-                  </div> 
-                </div>   
-              </div>
-            </div> 
-            {{/unless}}
-            {{/each}}
-
-          </div>
-        </div>  
-
-        <hr>
-        
-        <!-- popular stories -->
-        <div class="row">
-          <div class="col s12">
-            {{#each allStories}}
-            {{#unless archived}}
-            <div class="row">
-              <div class="col s12 current-stories-container">
-                <div class="card">
-                  <div class="card-content">
-                    <span class="card-title">{{story_title}}</span>
-                    <p><span class="first-story-post">{{post}}</span></p>
-                  </div>    
-                  <div class="card-action">
-                    <a class="" href="">View</a>
-                  </div> 
-                </div>   
-              </div>
-            </div> 
-            {{/unless}}
-            {{/each}}
-            
-          </div>
-        </div>
-        
+        </div>    
       </div>
-    </div> 
+
+      <hr>
+      
+{{!--         {{/with}}       
+--}}
+      <!-- Urban Dictionary API -->
+      <div class="row">
+        <div class="col s12 urban-dictionary-container">
+          <div id="urban">
+          </div>  
+        </div>
+      </div>     
+
+      <!-- table of currently active stories -->
+      <div class="row">
+        <div class="col s12">
+          {{#each userStoriesArray}}
+          {{#unless archived}}
+          <div class="row">
+            <div class="col s12 current-stories-container">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">{{this.title}}</span>
+                  <p><span class="first-story-post">{{this.post}}</span></p>
+                </div>    
+                <div class="card-action">
+                  <a class="" href="">Post</a>
+                </div> 
+              </div>   
+            </div>
+          </div> 
+          {{/unless}}
+          {{/each}}
+
+        </div>
+      </div>  
+
+      <hr>
+      
+      <!-- popular stories -->
+      <div class="row">
+        <div class="col s12">
+          {{#each allStoriesArray}}
+          <div class="row">
+            <div class="col s12 current-stories-container">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">{{this.story_title}}</span>
+                  <p><span class="first-story-post">{{this.post}}</span></p>
+                </div>    
+                <div class="card-action">
+                  <a class="" href="">View</a>
+                </div> 
+              </div>   
+            </div>
+          </div> 
+          {{/each}}
+          
+        </div>
+      </div>
+    </div>
   </div> 
 
 
@@ -123,6 +117,6 @@
 <!--Import Materialize--> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <!--Import js-->
-<script type="text/javascript" src="/js/app.js"></script>      
+<script type="text/javascript" src="./assets/js/app.js"></script>      
 </body>
 </html>

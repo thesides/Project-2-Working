@@ -1,0 +1,58 @@
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+#logo {
+	font-family: 'Special Elite', cursive;
+}
+
+#logo-img {
+    height: 70px;
+}
+
+.modal-header {
+	font-family: 'Special Elite', cursive;
+	text-align: center;	
+}
+
+.modal-text {
+	font-family: 'Merriweather', serif;
+	text-align: center;
+}
+
+a {
+	font-family: 'Merriweather', serif;
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+h2 {
+	font-family: 'Merriweather', serif;
+	color: black;
+}
+
+hr {
+	color:"grey lighten-1";
+}
+
+.current-story-container {
+  margin-top: 50px;
+}
+
+.author-list {
+  margin-top: 25px;
+}
+
+.blog-container {
+  margin-top: 30px;
+}
+
+

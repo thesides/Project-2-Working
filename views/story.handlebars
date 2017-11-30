@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+	<!-- Navbar -->
+	<div class="navbar-fixed">  
+		<nav>
+		  <div class="nav-wrapper cyan darken-2">
+		    <a id="logo" class="brand-logo center white-text" href="/">4 People 1 Story</a>
+		    <a href="#" data-activates="mobile-demo" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+		    <!-- Links show on desktop -->
+		    <ul class="right hide-on-med-and-down">
+		      <li><a class="white-text" id="logout" href="#" >Logout</a></li>  
+		    </ul>      
+		  </div>
+		</nav>
+	</div>
+
+	<!-- Navbar Links That Appear on Mobile Devices...outside of navbar-fixed to avoid nesting issues-->  
+	<div>
+		<ul class="side-nav" id="mobile-demo">
+		  <li><a class="white-text" id="logout" href="#" >Logout</a></li>
+		</ul>    
+	</div>
+
+	<div class="row">
+
+		<!-- Side Bar Nav -->
+		<div class="col s12 m4 l3 amber">
+			<div class="row valign-wrapper">  
+				<div class="col s12">
+					<ul class="links">
+
+						<!-- Link for User to create New Story-->
+						<li><a class="toStories" href="/">New Story</a></li>
+
+						<!-- Link for User's Archived List of Stories-->
+						<li><a class="toArchived" href="/archive">Archive</a></li>
+					</ul>  
+				</div>
+			</div>                
+		</div>
+
+		<!-- Main Column -->
+		<div class="col s12 m8 l9">
+
+			<!-- Story Form -->
+			<form class="create-form" id="cms-story" action="/api/story" method="POST">
+				<!-- Text Area -->
+				<div class="row">
+				  <div class="input-field col s12">
+				  	<input id="newTitle" name="title" type="text" class="validate">
+  					<label for="title">Title:</label>
+				  </div> 
+				</div>
+			</form> 
+
+			<!-- Submit Button -->
+			<div class="row">
+			  <div class="input-field col s12">
+			    <button id="createStory" class="btn waves-effect waves-light" type="submit">Create Story</button> 
+			  </div>              
+			</div>
+			<hr>
+		</div>
+
+	</div>
+
+<!--Import jQuery-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--Import Materialize--> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!--Import js-->
+<script type="text/javascript" src="./assets/js/app.js"></script> 
+<script type="text/javascript" src="./assets/js/cms.js"></script> 
+</body>

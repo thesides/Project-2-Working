@@ -4,23 +4,33 @@
 </head>
 
 <body>
+  <!-- Navbar -->
   <div class="navbar-fixed">  
     <nav>
-      <div class="nav-wrapper">
-        <a id="logo" class="brand-logo swap left" href="/">4 People 1 Story</a>
-        <ul id="nav-bar" class="right hide-on-med-and-down">
-          <li><a class="modal-trigger right" href="#login-modal" >Login</a></li>
-          <li><a class="modal-trigger right" href="#sign-up-modal" >Sign Up</a></li>          
-        </ul>
+      <div class="nav-wrapper cyan darken-2">
+        <a id="logo" class="brand-logo center white-text" href="/">4 People 1 Story</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+        <!-- Links show on desktop -->
+        <ul class="right hide-on-med-and-down">
+          <li><a class="modal-trigger right white-text" href="#login-modal" >Login</a></li>
+          <li><a class="modal-trigger right white-text" href="#sign-up-modal" >Sign Up</a></li>  
+        </ul>  
       </div>
     </nav>
   </div>
+  <div>
+    <!-- Navbar Links That Appear on Mobile Devices...outside of navbar-fixed to avoid nesting issues-->
+    <ul class="side-nav" id="mobile-demo">
+      <li><a class="modal-trigger white-text" href="#login-modal" >Login</a></li>
+      <li><a class="modal-trigger white-text" href="#sign-up-modal" >Sign Up</a></li>
+    </ul>
+  </div>
 
   <!-- Login Modal -->
-  <div id="login-modal" class="modal">
+  <div id="login-modal" class="modal blue-grey lighten-5">
     <div class="modal-content">
-      <h1>Have An Account?</h1>
-      <p>Login To See Your Stories!</p>
+      <h1 class="modal-header">Have An Account?</h1>
+      <p class="modal-text">Login To See Your Stories!</p>
 
       <form {{!-- class="create-form" action="/api/users" method="POST" --}}>
         <div class="row">
@@ -50,7 +60,7 @@
       <h1>Sign Up To Join A Story...</h1>
       <p>Or create your own!</p>
 
-      <form class="create-form" action="/api/newuser" method="POST">
+      <form class="create-form" action="/api/users" method="POST">
         <div class="row">
           <div class="input-field col s6">
               <input id="usernameSignUp" type="text" class="validate">
@@ -78,12 +88,21 @@
     </div>
   </div>  
 
+  <!--typewriter image -->
+  <div class="container">
+    <div class="row">
+      <!-- Main Column -->
+      <div class="container">
+        <img class="responsive-img" src="/assets/images/typewriter.jpg" alt="typewriter"/>
+      </div>
+    </div>
+  </div>          
+
 <!--Import jQuery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!--Import Materialize--> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <!--Import js-->
-<script type="text/javascript" src="/js/app.js"></script>  
-<script type="text/javascript" src="/js/crm.js"></script> 
+<script type="text/javascript" src="./assets/js/app.js"></script>  
 </body>
 </html>
