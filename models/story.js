@@ -12,18 +12,9 @@ module.exports = function (sequelize, DataTypes) {
 
 	//associating stories with all the posts in the story
 	Story.associate = function (models) {
-		
-		//maps the story threaf to all relevant posts
-		Story.hasMany(models.Post, {
-			onDelete: "cascade"
-		});
+		Story.hasMany(models.Post)
 
-		//maps the story thread to the user who created it
-		Story.belongsTo(models.User, {
-			foreignKey: {
-				allowNull: false
-			}
-		});
+		Story.belongsTo(models.User)
 	};
 	
 	return Story;

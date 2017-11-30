@@ -22,18 +22,22 @@ app.get("/", function(req, res) {
     res.render("home");
 });
 
-app.get("/home", function(req, res) {
+app.get("/user", function(req, res) {
     res.render("loggedInUserView");
 });
 
-app.get("/cms", function(req, res) {
-    res.render("cms");
+app.get("/story", function(req, res) {
+    res.render("story");
+});
+
+app.get("/post", function(req, res) {
+    res.render("post");
 });
 
 // Static directory
 app.use(express.static("public"));
 
-require("./routes/user-routes.js")(app);
+require("./routes/api-routes.js")(app);
 require("./routes/story-routes.js")(app);
 require("./routes/post-routes.js")(app);
 
