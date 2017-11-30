@@ -12,6 +12,9 @@ $(document).ready(function(){
 	//click listener for create new post for existing story button
 	$("#createPost").on("click", handleNewPostSubmit);
 
+	//click listener for login attempt of existing user
+	$("#loginSubmit").on("click", handleLogin);
+
 	////////////////////////////
 	//click listeners go here//
 	//////////////////////////
@@ -112,7 +115,7 @@ $(document).ready(function(){
 
 
 //Function for User Creation
-	function handleNewUserSubmit () {
+	function handleNewUserSubmit (event) {
 		event.preventDefault();
 
 		//if they didn't enter anything, return
@@ -141,6 +144,42 @@ $(document).ready(function(){
 				window.location.href = "/user";
 			});
 	}
+
+	function handleLogin (event) {
+
+		event.preventDefault();
+
+		if (!$("#email-login").val().trim() || !$("#password-login").val().trim()) {
+	      return;
+	    };
+
+	    var loginInfo = {
+	    	email: $("#email-login").val().trim(),
+	    	password: $("#password-login").val().trim()
+	    };
+
+	    loginUser(loginInfo);
+
+	}
+
+	function loginUser (loginUserInfo) {
+
+		$.ajax("/api/login", {
+			type: "POST",
+			data: loginUserInfo
+		}).done(function (error, response) {
+
+			if (error) {
+				console.log(error);
+			}
+			console.log(response);
+			//if response.userName exists then load user page with related userId
+			console.log("---------------");
+			console.log(response.userName + " EXISTS!!! YAY!!!");
+			console.log("---------------");
+		});
+
+	};
 
 	function getAllUsers () {
 		//ajax get request to retrieve all users

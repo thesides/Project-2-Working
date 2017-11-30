@@ -85,5 +85,30 @@ module.exports = function (app) {
 		});
 	});
 
+	//login attempt checks to see if account with same password exists in user table
+	app.post("/api/login", function (req, res) {
+		
+		console.log("-2-2-2-2-2-2-2-2");
+		console.log(req.body);
+
+		db.User.findOne({
+			where: {
+				password: req.body.password
+			}
+		}).done(function (data) {
+			
+			res.json(data);
+			//if there was no data returned (aka incorrect info recevied from frontend breaking the request)
+			//then log OOPSS!! 
+			if (!data) {
+				console.log("OOPPPSS!!!");
+			};
+
+			//Otherwise tell me the name of the user you found
+			console.log("Found User " + data.userName);
+
+		});
+	});
+
 
 }
