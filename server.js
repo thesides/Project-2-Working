@@ -3,8 +3,26 @@ var bodyParser = require("body-parser")
 var exphbs = require("express-handlebars");
 var app = express();
 var PORT = process.env.PORT || 8080;
+var passport = require("passport");
+var FacebookStrategy = require("passport-facebook").Strategy;
 
 var db = require("./models");
+
+// passport-facebook code
+
+passport.use(new FacebookStrategy({
+    clientID: 163050734441007,
+    clientSecret: "a0aeedaba02c2bc8bcc27cd504276de6",
+    clientToken: "f76337563235e87ffd7120e21d158dd0",
+    callbackURL: "http://localhost/auth/facebook/callback",
+    profileFields: ['displayName', 'email']
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,8 +49,26 @@ app.get("/story", function(req, res) {
 });
 
 app.get("/post", function(req, res) {
-    res.render("post");
+    res.render("createPost");
 });
+
+app.get("/archive", function(req, res) {
+	res.render("post");
+});
+
+app.get("/cms", function(req, res) {
+	res.render("story");
+});
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // Static directory
 app.use(express.static("public"));

@@ -4,7 +4,6 @@
   "description": "Project-2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
@@ -26,9 +25,8 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.5.0",
     "nightmare": "^2.10.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "sequelize": "^4.22.6"
-  },
-   "scripts": {
-       "start": "node server.js"
-     }
+  }
 }

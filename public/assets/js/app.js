@@ -31,6 +31,16 @@ $(document).ready(function(){
 
 	});
 
+	$('#facebook-modal').modal({
+		dismissible: true,
+		ready: function(modal, trigger) {
+			console.log(modal, trigger);
+		},
+		complete: function() {
+			console.log("closed");
+		}
+	});
+
 	//sign up modal input validation
 	// $("#signUpSubmit").on("click", function() {
 
