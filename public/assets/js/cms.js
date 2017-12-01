@@ -12,6 +12,9 @@ $(document).ready(function(){
 	//click listener for retrieve all stories button
 	//$("#getStories").on("click", getAllStories);
 
+	//click listener for logout button
+	$("#logout").on("click", logout);
+
 	//click listener for create new post for existing story button
 	$("#createPost").on("click", handleNewPostSubmit);
 
@@ -216,7 +219,16 @@ $(document).ready(function(){
 		$.get("/api/allusers", function (dataReceived){
 			console.log(dataReceived);
 		});
-	}
+	};
+
+
+
+	function logout () {
+		$.get("/", function (){
+			window.location.href = "/";
+		});
+		
+	};
 
 
 
