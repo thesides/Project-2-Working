@@ -39,21 +39,21 @@ $(document).ready(function(){
 			//first post body text ask
 			var postBody = $("#firstPost").val().trim();
 
-			name = name;
+			// name = name;
 
-			if (name === undefined) {
-				name = userName;
-			};
+			// if (name === undefined) {
+			// 	name = userName;
+			// };
 
 			//call the create story ajax call function below; passing in the title and initial post (postBody) as the data to send off
-			createNewStory(newStoryTitle, postBody, name);
+			createNewStory(newStoryTitle, postBody);
 	};
 
-	function createNewStory (title, firstPost, name, userId) {
+	function createNewStory (title, firstPost, userId) {
 		//Add a new story thread when user clicks create story button
 			
 			//sends new story title to db and gets back a story id to pass to the post
-			$.ajax("/api/story/" + name, {
+			$.ajax("/api/story", {
 				type: "POST",
 				data: {
 					storyName: title,
@@ -68,7 +68,7 @@ $(document).ready(function(){
 				var userId = dataSent.UserId
 
 				//ajax post request gets sent out along the /api/post route
-				$.ajax("/api/post/", {
+				$.ajax("/api/post", {
 					type: "POST",
 					data: {
 						body: firstPost,
@@ -80,12 +80,14 @@ $(document).ready(function(){
 
 					getAllStories();
 					//after a story is created take us to the create new post page
-					if (name === undefined) {
-						window.location.href = "/user/" + userName;
-					}
-					else {
-						window.location.href = "/user/" + name;
-					};
+					// if (name === undefined) {
+					// 	window.location.href = "/user/" + userName;
+					// }
+					// else {
+					// 	window.location.href = "/user/" + name;
+					// };
+
+					window.location.href = "/user"
 					
 				});
 			});
@@ -156,15 +158,15 @@ $(document).ready(function(){
 
 	function createUser (newUser) {
 
-		name = newUser.name;
+		//name = newUser.name;
 		//sends ajax call along route /api/newuser; data being sent is what is passed in for newUser
 		$.ajax("/api/newuser", {
 				type: "POST",
 				data: newUser
 			}).then(function(dataSent){
 				console.log(dataSent);
-				window.location.href = "/user/" + name;
-				name = dataSent.name;
+				window.location.href = "/user";
+				//name = dataSent.name;
 			});
 	};
 
@@ -187,9 +189,9 @@ $(document).ready(function(){
 
 	function loginUser (loginUserInfo) {
 
-		userName = loginUserInfo.email;
+		//userName = loginUserInfo.email;
 
-		$.ajax("/api/login/" + userName, {
+		$.ajax("/api/login", {
 			type: "POST",
 			data: loginUserInfo
 		}).done(function (error, response) {
@@ -199,7 +201,7 @@ $(document).ready(function(){
 			}
 			//var name = loginUserInfo.name;
 			//window.location.href = "/user/" + name;
-			userName = response.userName;
+			//userName = response.userName;
 			takeMeToMyPage(userName);
 			
 			//console.log(response);
@@ -208,9 +210,9 @@ $(document).ready(function(){
 
 	};
 
-	function takeMeToMyPage (name) {
-		$.get("/user/" + name, function (data){
-			window.location.href = "/user/" + name;
+	function takeMeToMyPage () {
+		$.get("/user", function (data){
+			window.location.href = "/user"
 		});
 	};
 

@@ -47,7 +47,7 @@ module.exports = function (app) {
 	});
 
 	//this route creates a story thread using the story title data from story.js file
-	app.post("/api/story/:name", function (req, res) {
+	app.post("/api/story", function (req, res) {
 		console.log(req.body);
 
 		//var UserId = req.session.id;
@@ -91,14 +91,14 @@ module.exports = function (app) {
 	});
 
 	//login attempt checks to see if account with same password exists in user table
-	app.post("/api/login/:name", function (req, res) {
+	app.post("/api/login", function (req, res) {
 
 		console.log("-2-2-2-2-2-2-2-2");
 		console.log(req.body);
 
 		db.User.findOne({
 			where: {
-				userName: req.params.name,
+				email: req.body.email,
 				password: req.body.password
 			}
 		}).done(function (data) {
@@ -119,7 +119,7 @@ module.exports = function (app) {
 		});
 	});
 
-	app.get("/user/:name", function (req, res) {
+	app.get("/api/story", function (req, res) {
 		
 		db.Story.findAll({UserId: req.body.id, 
 					include: [db.Post]

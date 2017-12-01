@@ -32,7 +32,7 @@ app.get("/", function(req, res) {
     res.render("home");
 });
 
-app.get("/user/:name", function(req, res) {
+app.get("/user", function(req, res) {
     res.render("loggedInUserView", res);
 });
 
