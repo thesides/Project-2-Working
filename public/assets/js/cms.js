@@ -135,13 +135,15 @@ $(document).ready(function(){
 	}
 
 	function createUser (newUser) {
+
+		var name = newUser.name;
 		//sends ajax call along route /api/newuser; data being sent is what is passed in for newUser
 		$.ajax("/api/newuser", {
 				type: "POST",
 				data: newUser
 			}).then(function(dataSent){
 				console.log(dataSent);
-				window.location.href = "/user";
+				window.location.href = "/user/" + name;
 			});
 	}
 
@@ -164,7 +166,9 @@ $(document).ready(function(){
 
 	function loginUser (loginUserInfo) {
 
-		$.ajax("/api/login", {
+		var userName = loginUserInfo.email;
+
+		$.ajax("/api/login/" + userName, {
 			type: "POST",
 			data: loginUserInfo
 		}).done(function (error, response) {
@@ -172,13 +176,20 @@ $(document).ready(function(){
 			if (error) {
 				console.log(error);
 			}
-			console.log(response);
-			//if response.userName exists then load user page with related userId
-			console.log("---------------");
-			console.log(response.userName + " EXISTS!!! YAY!!!");
-			console.log("---------------");
+			//var name = loginUserInfo.name;
+			//window.location.href = "/user/" + name;
+			takeMeToMyPage(userName);
+			
+			//console.log(response);
+			
 		});
 
+	};
+
+	function takeMeToMyPage (name) {
+		$.get("/user/" + name, function (data){
+			window.location.href = "/user/" + name;
+		});
 	};
 
 	function getAllUsers () {

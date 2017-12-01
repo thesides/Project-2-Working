@@ -1,6 +1,7 @@
 var express = require("express")
 var bodyParser = require("body-parser")
 var exphbs = require("express-handlebars");
+var session = require('express-session');
 var app = express();
 var PORT = process.env.PORT || 8080;
 
@@ -10,6 +11,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 
 // Set Handlebars
@@ -22,7 +32,7 @@ app.get("/", function(req, res) {
     res.render("home");
 });
 
-app.get("/user", function(req, res) {
+app.get("/user/:name", function(req, res) {
     res.render("loggedInUserView");
 });
 

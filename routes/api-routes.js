@@ -40,9 +40,9 @@ module.exports = function (app) {
 			res.send(data);
 			console.log(data);
 			console.log("---------------");
-			console.log(data.id);
+			//console.log(data.id);
 
-			UserId = data.id;
+			//UserId = data.id;
 		});
 	});
 
@@ -50,9 +50,12 @@ module.exports = function (app) {
 	app.post("/api/story", function (req, res) {
 		console.log(req.body);
 
+		//var UserId = req.session.id;
+
 		db.Story.create({
 			storyName: req.body.storyName,
-			UserId: UserId
+			UserId: req.body.UserId
+			//UserId
 			//req.body.UserId
 			//UserId: NEED TO GRAB USER ID FROM TABLE AND SEND WITH STORY CREATION REQUEST
 		}).done(function(data){
@@ -74,6 +77,8 @@ module.exports = function (app) {
 
 		console.log(req.body);
 
+		//var UserId = req.session.id;
+
 		//creates a post that includes the post text (body) and the related story ID
 		db.Post.create({
 			body: req.body.body,
@@ -86,13 +91,14 @@ module.exports = function (app) {
 	});
 
 	//login attempt checks to see if account with same password exists in user table
-	app.post("/api/login", function (req, res) {
-		
+	app.post("/api/login/:name", function (req, res) {
+
 		console.log("-2-2-2-2-2-2-2-2");
 		console.log(req.body);
 
 		db.User.findOne({
 			where: {
+				userName: req.params.name,
 				password: req.body.password
 			}
 		}).done(function (data) {
@@ -106,8 +112,45 @@ module.exports = function (app) {
 
 			//Otherwise tell me the name of the user you found
 			console.log("Found User " + data.userName);
+			console.log("1-1-1-1-1-1-1-1")
+			//req.session.id = data.userName;
+			console.log(req.session.id);
 
 		});
+	});
+
+	app.get("/user/:name", function (req, res) {
+		
+		db.Story.findAll({UserId: req.body.id, 
+					include: [db.Post]
+			}).then(function (data) {
+			res.json(data);
+
+			
+			//render results to the page using res.render("index", data)
+		});
+
+		// db.User.findOne({
+		// 	where: {
+		// 		userName: req.params.name,
+		// 		password: req.body.password
+		// 	}
+		// }).done(function (data) {
+			
+		// 	res.json(data);
+		// 	//if there was no data returned (aka incorrect info recevied from frontend breaking the request)
+		// 	//then log OOPSS!! 
+		// 	if (!data) {
+		// 		console.log("OOPPPSS!!!");
+		// 	};
+
+		// 	//Otherwise tell me the name of the user you found
+		// 	console.log("Found User " + data.userName);
+		// 	console.log("1-1-1-1-1-1-1-1")
+		// 	//req.session.id = data.userName;
+		// 	console.log(req.session.id);
+
+		// });
 	});
 
 
