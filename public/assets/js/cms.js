@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+	var userName;
+	var name;
+
 	//Add a new user button listen for when a new user is submitted
 	$("#signUpSubmit").on("click", handleNewUserSubmit);
 
@@ -8,6 +11,9 @@ $(document).ready(function(){
 
 	//click listener for retrieve all stories button
 	$("#getStories").on("click", getAllStories);
+
+	//click listener for logout button
+	$("#logout").on("click", logout);
 
 	//click listener for create new post for existing story button
 	$("#createPost").on("click", handleNewPostSubmit);
@@ -33,6 +39,12 @@ $(document).ready(function(){
 			//first post body text ask
 			var postBody = $("#firstPost").val().trim();
 
+			// name = name;
+
+			// if (name === undefined) {
+			// 	name = userName;
+			// };
+
 			//call the create story ajax call function below; passing in the title and initial post (postBody) as the data to send off
 			createNewStory(newStoryTitle, postBody);
 	};
@@ -49,15 +61,18 @@ $(document).ready(function(){
 				}
 			}).done(function(dataSent){
 				
+				//window.location.href = "/user/" + userName;
 				//grab the story id so it can be sent to the post table with the body of the first post
 				var storyId = dataSent.id
+
+				var userId = dataSent.UserId
 
 				//ajax post request gets sent out along the /api/post route
 				$.ajax("/api/post", {
 					type: "POST",
 					data: {
 						body: firstPost,
-						StoryId: storyId,
+						//StoryId: storyId,
 						//UserId: userId
 					}
 				}).then(function(data){
@@ -65,7 +80,14 @@ $(document).ready(function(){
 
 					getAllStories();
 					//after a story is created take us to the create new post page
-					window.location.href = "/user";
+					// if (name === undefined) {
+					// 	window.location.href = "/user/" + userName;
+					// }
+					// else {
+					// 	window.location.href = "/user/" + name;
+					// };
+
+					window.location.href = "/user"
 					
 				});
 			});
@@ -136,6 +158,8 @@ $(document).ready(function(){
 	}
 
 	function createUser (newUser) {
+
+		//name = newUser.name;
 		//sends ajax call along route /api/newuser; data being sent is what is passed in for newUser
 		$.ajax("/api/newuser", {
 				type: "POST",
@@ -143,8 +167,9 @@ $(document).ready(function(){
 			}).then(function(dataSent){
 				console.log(dataSent);
 				window.location.href = "/user";
+				//name = dataSent.name;
 			});
-	}
+	};
 
 	function handleLogin (event) {
 
@@ -165,6 +190,8 @@ $(document).ready(function(){
 
 	function loginUser (loginUserInfo) {
 
+		//userName = loginUserInfo.email;
+
 		$.ajax("/api/login", {
 			type: "POST",
 			data: loginUserInfo
@@ -173,13 +200,21 @@ $(document).ready(function(){
 			if (error) {
 				console.log(error);
 			}
-			console.log(response);
-			//if response.userName exists then load user page with related userId
-			console.log("---------------");
-			console.log(response.userName + " EXISTS!!! YAY!!!");
-			console.log("---------------");
+			//var name = loginUserInfo.name;
+			//window.location.href = "/user/" + name;
+			//userName = response.userName;
+			takeMeToMyPage(userName);
+			
+			//console.log(response);
+			
 		});
 
+	};
+
+	function takeMeToMyPage () {
+		$.get("/user", function (data){
+			window.location.href = "/user"
+		});
 	};
 
 	function getAllUsers () {
@@ -187,7 +222,16 @@ $(document).ready(function(){
 		$.get("/api/allusers", function (dataReceived){
 			console.log(dataReceived);
 		});
-	}
+	};
+
+
+
+	function logout () {
+		$.get("/", function (){
+			window.location.href = "/";
+		});
+		
+	};
 
 
 
