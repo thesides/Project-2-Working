@@ -24,7 +24,7 @@ module.exports = function (app) {
 			include: [db.Post]
 		}).then(function (data) {
 			res.json(data);
-			//render results to the page using res.render("index", data)
+			res.render(data);
 		});
 	});
 	

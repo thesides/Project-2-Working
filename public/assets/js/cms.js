@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$("#createStory").on("click", handleNewStorySubmit);
 
 	//click listener for retrieve all stories button
-	//$("#getStories").on("click", getAllStories);
+	$("#getStories").on("click", getAllStories);
 
 	//click listener for logout button
 	$("#logout").on("click", logout);
@@ -51,7 +51,7 @@ $(document).ready(function(){
 
 	function createNewStory (title, firstPost, userId) {
 		//Add a new story thread when user clicks create story button
-			
+			event.preventDefault();
 			//sends new story title to db and gets back a story id to pass to the post
 			$.ajax("/api/story", {
 				type: "POST",
@@ -97,11 +97,11 @@ $(document).ready(function(){
 		event.preventDefault();
 
 		//if the post is empty return
-		if (!$("#newPost").val().trim()) {
+		if (!$("#createPost").val().trim()) {
 	      return;
 	    }
 	    	//grabs the text in the new post field
-	    	var postBody = $("#newPost").val().trim();
+	    	var postBody = $("#firstPost").val().trim();
 
 	    	var storyId; //grab this from handlebars data element when clicked
 
@@ -120,18 +120,19 @@ $(document).ready(function(){
 						StoryId: storyId,
 						UserId: userId
 					}
-				}).then(function (data) {
+				}).then(function (body) {
 
 				//call get all posts
-				console.log(data);
+				console.log(body);
 				//window.location.href = "/";
 				});
 	};
 
 	function getAllStories (){
 		//ajax get request to retrieve all stories and their posts
-		$.get("/api/story", function (dataReceived){
+		$.get("/api/story", function (data){
 			console.log(dataReceived);
+			res.json(dataReceived);
 		});
 	};
 
