@@ -47,7 +47,7 @@ module.exports = function (app) {
 	});
 
 	//this route creates a story thread using the story title data from story.js file
-	app.post("/api/story", function (req, res) {
+	app.post("/api/story/:name", function (req, res) {
 		console.log(req.body);
 
 		//var UserId = req.session.id;

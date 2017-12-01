@@ -36,15 +36,21 @@ $(document).ready(function(){
 			//first post body text ask
 			var postBody = $("#firstPost").val().trim();
 
+			name = name;
+
+			if (name === undefined) {
+				name = userName;
+			};
+
 			//call the create story ajax call function below; passing in the title and initial post (postBody) as the data to send off
-			createNewStory(newStoryTitle, postBody);
+			createNewStory(newStoryTitle, postBody, name);
 	};
 
-	function createNewStory (title, firstPost, userId) {
+	function createNewStory (title, firstPost, name, userId) {
 		//Add a new story thread when user clicks create story button
 			
 			//sends new story title to db and gets back a story id to pass to the post
-			$.ajax("/api/story", {
+			$.ajax("/api/story/" + name, {
 				type: "POST",
 				data: {
 					storyName: title,
@@ -59,7 +65,7 @@ $(document).ready(function(){
 				var userId = dataSent.UserId
 
 				//ajax post request gets sent out along the /api/post route
-				$.ajax("/api/post", {
+				$.ajax("/api/post/", {
 					type: "POST",
 					data: {
 						body: firstPost,
@@ -71,11 +77,11 @@ $(document).ready(function(){
 
 					getAllStories();
 					//after a story is created take us to the create new post page
-					if (userName === undefined) {
-						window.location.href = "/user/" + name;
+					if (name === undefined) {
+						window.location.href = "/user/" + userName;
 					}
 					else {
-						window.location.href = "/user/" + userName;
+						window.location.href = "/user/" + name;
 					};
 					
 				});
@@ -155,9 +161,9 @@ $(document).ready(function(){
 			}).then(function(dataSent){
 				console.log(dataSent);
 				window.location.href = "/user/" + name;
-
+				name = dataSent.name;
 			});
-	}
+	};
 
 	function handleLogin (event) {
 
@@ -190,6 +196,7 @@ $(document).ready(function(){
 			}
 			//var name = loginUserInfo.name;
 			//window.location.href = "/user/" + name;
+			userName = response.userName;
 			takeMeToMyPage(userName);
 			
 			//console.log(response);
