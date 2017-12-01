@@ -42,7 +42,7 @@ module.exports = function (app) {
 			console.log("---------------");
 			//console.log(data.id);
 
-			//UserId = data.id;
+			UserId = data.id;
 		});
 	});
 
@@ -54,7 +54,7 @@ module.exports = function (app) {
 
 		db.Story.create({
 			storyName: req.body.storyName,
-			UserId: req.body.UserId
+			UserId: UserId
 			//UserId
 			//req.body.UserId
 			//UserId: NEED TO GRAB USER ID FROM TABLE AND SEND WITH STORY CREATION REQUEST
@@ -114,8 +114,8 @@ module.exports = function (app) {
 			console.log("Found User " + data.userName);
 			console.log("1-1-1-1-1-1-1-1")
 			//req.session.id = data.userName;
-			console.log(req.session.id);
-
+			//console.log(req.session.id);
+			UserId = data.id;
 		});
 	});
 
@@ -126,7 +126,7 @@ module.exports = function (app) {
 			}).then(function (data) {
 			res.json(data);
 
-			
+
 			//render results to the page using res.render("index", data)
 		});
 

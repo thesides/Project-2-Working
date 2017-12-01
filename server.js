@@ -33,7 +33,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/user/:name", function(req, res) {
-    res.render("loggedInUserView");
+    res.render("loggedInUserView", res);
 });
 
 app.get("/story", function(req, res) {
