@@ -26,14 +26,18 @@ $(document).ready(function(){
     // $("#signUpSubmit").on("click", handleNewUserSubmit);
 
     //click listener for login attempt of existing user
-     $(document).on("submit", "#login-form", handleLogin);    
+     $(document).on("submit", "#login-form", handleLogin);  
+
+    //Facebook button
+
+     // $(document).on("submit", "#facebook-modal", handleFacebook);  
     // $("#loginSubmit").on("click", handleLogin);    
 
     //click listener for create a story button
     $("#createStory").on("click", handleNewStorySubmit);
 
     //click listener for retrieve all stories button
-    //$("#getStories").on("click", getAllStories);
+    $("#getStories").on("click", getAllStories);
 
     //click listener for logout button
     $("#logout").on("click", logout);
