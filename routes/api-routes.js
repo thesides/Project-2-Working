@@ -38,7 +38,7 @@ module.exports = function (app) {
 			email: req.body.email
 		}).then(function(data){
 			res.send(data);
-			console.log(data);
+			//console.log(data);
 			console.log("---------------");
 			//console.log(data.id);
 
@@ -112,21 +112,27 @@ module.exports = function (app) {
 
 			//Otherwise tell me the name of the user you found
 			console.log("Found User " + data.userName);
-			console.log("1-1-1-1-1-1-1-1")
-			//req.session.id = data.userName;
-			//console.log(req.session.id);
+			
+			
 			UserId = data.id;
 		});
 	});
 
-	app.get("/api/story", function (req, res) {
+	app.get("/api/user", function (req, res) {
 		
-		db.Story.findAll({UserId: req.body.id, 
-					include: [db.Post]
-			}).then(function (data) {
-			res.json(data);
+		console.log(req.body);
 
+		db.Story.findAll({}).then(function (data) {
+			
+			var context = {
+				userStoriesArray: [data],
+				storyName: data.storyName
+			};
 
+			res.render("loggedInUserView", context);
+			console.log("-----------------");
+			console.log(data);
+			console.log("------------------");
 			//render results to the page using res.render("index", data)
 		});
 

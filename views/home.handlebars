@@ -4,7 +4,6 @@
 </head>
 
 <body>
-
   <!-- Navbar -->
   <div class="navbar-fixed">  
     <nav>
@@ -14,8 +13,7 @@
         <!-- Links show on desktop -->
         <ul class="right hide-on-med-and-down">
           <li><a class="modal-trigger right white-text" href="#login-modal" >Login</a></li>
-          <li><a class="modal-trigger right white-text" href="#sign-up-modal" >Sign Up</a></li>
-          <li><a class="modal-trigger white-text" href="#facebook-modal" >Log In With Facebook!</a></li>  
+          <li><a class="modal-trigger right white-text" href="#sign-up-modal" >Sign Up</a></li>  
         </ul>  
       </div>
     </nav>
@@ -25,7 +23,6 @@
     <ul class="side-nav" id="mobile-demo">
       <li><a class="modal-trigger white-text" href="#login-modal" >Login</a></li>
       <li><a class="modal-trigger white-text" href="#sign-up-modal" >Sign Up</a></li>
-      <li><a class="modal-trigger white-text" href="#facebook-modal" >Log In With Facebook!</a></li>
     </ul>
   </div>
 
@@ -35,7 +32,7 @@
       <h1 class="modal-header">Have An Account?</h1>
       <p class="modal-text">Login To See Your Stories!</p>
 
-      <form {{!-- class="create-form" action="/api/users" method="POST" --}}>
+      <form class="create-form" id="login-form" action="/api/users" method="POST">
         <div class="row">
           <div class="input-field col s12">
             <input id="email-login" type="email" name="emailLogin" class="validate">
@@ -47,13 +44,13 @@
             <input id="password-login" type="password" name="passwordLogin" class="validate">
             <label for="passwordLogin">Password: </label>
           </div>
-        </div>
+        </div> 
+        <div class="row">
+          <div class="input-field col s12">          
+            <button class="btn waves-effect waves-light right" type="submit" name="action" id="loginSubmit">LOGIN</button>
+          </div>
+        </div>        
       </form>
-
-      <div class="modal-footer">
-        <button class="btn waves-effect waves-light left" type="submit" name="action" id="loginSubmit">LOGIN
-        </button>
-      </div>
     </div>
   </div>      
 
@@ -63,43 +60,33 @@
       <h1>Sign Up To Join A Story...</h1>
       <p>Or create your own!</p>
 
-      <form class="create-form" action="/api/newuser" method="POST">
+      <form class="create-form" id="signup-form" action="/api/newuser" method="POST">
         <div class="row">
-          <div class="input-field col s6">
-              <input id="usernameSignUp" type="text" class="validate">
-              <label for="usernameSignUp">Username</label>
+          <div class="input-field col s12">
+            <input id="usernameSignUp" type="text" class="validate">
+            <label for="usernameSignUp">Username</label>
           </div>
-         </div>
-         <div class="row">
-            <div class="input-field col s12">
-              <input id="emailSignUp" type="email" class="validate">
-              <label for="emailSignUp">E-mail</label>
-            </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="emailSignUp" type="email" class="validate">
+            <label for="emailSignUp">E-mail</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="passwordSignUp" type="password" class="validate">
-              <label for="passwordSignUp">Password</label>
-            </div>
-          </div> 
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="passwordSignUp" type="password" class="validate">
+            <label for="passwordSignUp">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <button class="btn waves-effect waves-light left" type="submit" name="action" id="signUpSubmit">SIGN UP</button>
+          </div>
+        </div>           
       </form>
 
-      <div class="modal-footer">
-        <button class="btn waves-effect waves-light left" type="submit" name="action" id="signUpSubmit">SIGN UP
-        </button>
-      </div>
-    </div>
-  </div>
 
-  <div id="facebook-modal" class="modal blue-grey lighten-5">
-    <div class="modal-content">
-      <h1 class="modal-header">Have A Facebook Account?</h1>
-      <p class="modal-text">Login To See Your Stories!</p>
-
-      <div class="modal-footer">
-        <button class="btn waves-effect waves-light left" type="submit" name="action" id="loginSubmit"><a href="/auth/facebook">Login with Facebook</a>
-        </button>
-      </div>
     </div>
   </div>  
 
@@ -113,13 +100,13 @@
     </div>
   </div>          
 
-<!--Import jQuery-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!--Import Materialize--> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<!--Import js-->
-<script type="text/javascript" src="./assets/js/app.js"></script>  
+  <!--Import jQuery-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!--Import Materialize--> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <!--Import js-->
+  <script type="text/javascript" src="./assets/js/app.js"></script>  
 
-<script type="text/javascript" src="./assets/js/cms.js"></script> 
+  <script type="text/javascript" src="./assets/js/cms.js"></script> 
 </body>
 </html>

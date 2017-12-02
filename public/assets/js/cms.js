@@ -3,23 +3,43 @@ $(document).ready(function(){
 	var userName;
 	var name;
 
-	//Add a new user button listen for when a new user is submitted
-	$("#signUpSubmit").on("click", handleNewUserSubmit);
+	// //Add a new user button listen for when a new user is submitted
+	// $("#signUpSubmit").on("click", handleNewUserSubmit);
 
-	//click listener for create a story button
-	$("#createStory").on("click", handleNewStorySubmit);
+	// //click listener for create a story button
+	// $("#createStory").on("click", handleNewStorySubmit);
 
-	//click listener for retrieve all stories button
-	$("#getStories").on("click", getAllStories);
+	// //click listener for retrieve all stories button
+	// $("#getStories").on("click", getAllStories);
 
-	//click listener for logout button
-	$("#logout").on("click", logout);
+	// //click listener for logout button
+	// $("#logout").on("click", logout);
 
-	//click listener for create new post for existing story button
-	$("#createPost").on("click", handleNewPostSubmit);
+	// //click listener for create new post for existing story button
+	// $("#createPost").on("click", handleNewPostSubmit);
 
-	//click listener for login attempt of existing user
-	$("#loginSubmit").on("click", handleLogin);
+	// //click listener for login attempt of existing user
+	// $("#loginSubmit").on("click", handleLogin);
+
+	    //Add a new user button listen for when a new user is submitted
+     $(document).on("submit", "#signup-form", handleNewUserSubmit);
+    // $("#signUpSubmit").on("click", handleNewUserSubmit);
+
+    //click listener for login attempt of existing user
+     $(document).on("submit", "#login-form", handleLogin);    
+    // $("#loginSubmit").on("click", handleLogin);    
+
+    //click listener for create a story button
+    $("#createStory").on("click", handleNewStorySubmit);
+
+    //click listener for retrieve all stories button
+    //$("#getStories").on("click", getAllStories);
+
+    //click listener for logout button
+    $("#logout").on("click", logout);
+
+    //click listener for create new post for existing story button
+    $("#createPost").on("click", handleNewPostSubmit);
 
 	////////////////////////////
 	//click listeners go here//
@@ -79,13 +99,6 @@ $(document).ready(function(){
 					console.log(data)
 
 					getAllStories();
-					//after a story is created take us to the create new post page
-					// if (name === undefined) {
-					// 	window.location.href = "/user/" + userName;
-					// }
-					// else {
-					// 	window.location.href = "/user/" + name;
-					// };
 
 					window.location.href = "/user"
 					
@@ -128,11 +141,23 @@ $(document).ready(function(){
 				});
 	};
 
+	// function handleGetAllStories (event) {
+	// 	event.preventDefault();
+
+
+
+
+	// 	getAllStories(userId);
+	// }
+
+
 	function getAllStories (){
 		//ajax get request to retrieve all stories and their posts
-		$.get("/api/story", function (data){
-			console.log(dataReceived);
-			res.json(dataReceived);
+		$.get("/api/user", function (data, status){
+			
+			console.log("----------------")
+			console.log(data);
+			console.log("----------------")
 		});
 	};
 
