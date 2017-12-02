@@ -1,7 +1,8 @@
 var express = require("express")
 var bodyParser = require("body-parser")
 var exphbs = require("express-handlebars");
-var session = require('express-session');
+var path = require("path");
+// var session = require('express-session');
 var app = express();
 var PORT = process.env.PORT || 8080;
 var passport = require("passport");
@@ -39,41 +40,6 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //   cookie: { secure: true }
 // }))
 
-
-// Set Handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-require("./routes/api-routes.js")(app);
-require("./routes/story-routes.js")(app);
-require("./routes/post-routes.js")(app);
-
-// Routes
-// =============================================================
-app.get("/", function(req, res) {
-    res.render("home");
-});
-
-app.get("/user", function(req, res) {
-    res.render("loggedInUserView", res);
-});
-
-app.get("/story", function(req, res) {
-    res.render("story");
-});
-
-app.get("/post", function(req, res) {
-    res.render("createPost");
-});
-
-app.get("/archive", function(req, res) {
-	res.render("post");
-});
-
-app.get("/cms", function(req, res) {
-	res.render("story");
-});
-
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
@@ -83,6 +49,14 @@ app.get('/auth/facebook/callback',
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+
+
+// Set Handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+require("./routes/api-routes.js")(app);
+require("./routes/routes.js")(app);
 
 // Static directory
 app.use(express.static("public"));

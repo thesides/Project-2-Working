@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
 	//associating stories with all the posts in the story
 	Story.associate = function (models) {
 		
-		//maps the story threaf to all relevant posts
+		//maps the story thread to all relevant posts
 		Story.hasMany(models.Post, {
 			onDelete: "cascade"
 		});

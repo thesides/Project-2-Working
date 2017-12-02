@@ -85,8 +85,9 @@ module.exports = function (app) {
 			StoryId: StoryId,
 			UserId: UserId
 			//UserId: NEEDS TO BE GRABBED FROM USER TABLE
-		}).done(function(data){
-			res.json(data);
+		}).done(function(){
+			// res.json(data);
+			res.redirect("/api/user");
 		});
 	});
 
@@ -125,8 +126,8 @@ module.exports = function (app) {
 		db.Story.findAll({}).then(function (data) {
 			
 			var context = {
-				userStoriesArray: [data],
-				storyName: data.storyName
+				userName: "trent",
+				userStoriesArray: [data]
 			};
 
 			res.render("loggedInUserView", context);
@@ -136,28 +137,27 @@ module.exports = function (app) {
 			//render results to the page using res.render("index", data)
 		});
 
-		// db.User.findOne({
-		// 	where: {
-		// 		userName: req.params.name,
-		// 		password: req.body.password
-		// 	}
-		// }).done(function (data) {
+	// 	db.User.findOne({
+	// 		where: {
+	// 			userName: req.params.name,
+	// 			password: req.body.password
+	// 		}
+	// 	}).done(function (data) {
 			
-		// 	res.json(data);
-		// 	//if there was no data returned (aka incorrect info recevied from frontend breaking the request)
-		// 	//then log OOPSS!! 
-		// 	if (!data) {
-		// 		console.log("OOPPPSS!!!");
-		// 	};
+	// 		res.json(data);
+	// 		//if there was no data returned (aka incorrect info recevied from frontend breaking the request)
+	// 		//then log OOPSS!! 
+	// 		if (!data) {
+	// 			console.log("OOPPPSS!!!");
+	// 		};
 
-		// 	//Otherwise tell me the name of the user you found
-		// 	console.log("Found User " + data.userName);
-		// 	console.log("1-1-1-1-1-1-1-1")
-		// 	//req.session.id = data.userName;
-		// 	console.log(req.session.id);
+	// 		//Otherwise tell me the name of the user you found
+	// 		console.log("Found User " + data.userName);
+	// 		console.log("1-1-1-1-1-1-1-1")
+	// 		//req.session.id = data.userName;
+	// 		console.log(req.session.id);
 
-		// });
-	});
-
+	// 	});
+	 });
 
 }

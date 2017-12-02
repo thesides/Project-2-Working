@@ -69,11 +69,11 @@ $(document).ready(function(){
 			createNewStory(newStoryTitle, postBody);
 	};
 
-	function createNewStory (title, firstPost, userId) {
+	function createNewStory (title, firstPost) {
 		//Add a new story thread when user clicks create story button
 			event.preventDefault();
 			//sends new story title to db and gets back a story id to pass to the post
-			$.ajax("/api/story", {
+			$.ajax("/story", {
 				type: "POST",
 				data: {
 					storyName: title,
@@ -95,14 +95,15 @@ $(document).ready(function(){
 						//StoryId: storyId,
 						//UserId: userId
 					}
-				}).then(function(data){
-					console.log(data)
+				})
+				// .then(function(data){
+				// 	// console.log(data)
 
-					getAllStories();
+				// 	getAllStories();
 
-					window.location.href = "/user"
+				// 	// window.location.href = "/user"
 					
-				});
+				// });
 			});
 	};
 
@@ -237,7 +238,7 @@ $(document).ready(function(){
 	};
 
 	function takeMeToMyPage () {
-		$.get("/user", function (data){
+		$.get("/api/user", function (data){
 			window.location.href = "/user"
 		});
 	};
