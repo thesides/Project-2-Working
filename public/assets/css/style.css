@@ -1,16 +1,19 @@
-
-header, main, footer {
-  padding-left: 300px;
+header,
+main,
+footer {
+    padding-left: 300px;
 }
 
-@media only screen and (max-width : 992px) {
-  header, main, footer {
-    padding-left: 0;
-  }
+@media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
+        padding-left: 0;
+    }
 }
 
 #logo {
-	font-family: 'Special Elite', cursive;
+    font-family: 'Special Elite', cursive;
 }
 
 #logo-img {
@@ -18,41 +21,45 @@ header, main, footer {
 }
 
 .modal-header {
-	font-family: 'Special Elite', cursive;
-	text-align: center;	
+    font-family: 'Special Elite', cursive;
+    text-align: center;
 }
 
 .modal-text {
-	font-family: 'Merriweather', serif;
-	text-align: center;
+    font-family: 'Merriweather', serif;
+    text-align: center;
+}
+
+p.name,
+p.plot,
+button#load-urban {
+    font-family: 'Special Elite', cursive;
 }
 
 a {
-	font-family: 'Merriweather', serif;
-	color: black;
-	font-weight: bold;
-	text-decoration: none;
+    font-family: 'Merriweather', serif;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 h2 {
-	font-family: 'Merriweather', serif;
-	color: black;
+    font-family: 'Merriweather', serif;
+    color: black;
 }
 
 hr {
-	color:"grey lighten-1";
+    color: "grey lighten-1";
 }
 
 .current-story-container {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 .author-list {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .blog-container {
-  margin-top: 30px;
+    margin-top: 30px;
 }
-
-
