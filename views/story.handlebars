@@ -27,21 +27,17 @@
 
 	<div class="row">
 
-		<!-- Side Bar Nav -->
-		<div class="col s12 m4 l3 amber">
-			<div class="row valign-wrapper">  
-				<div class="col s12">
-					<ul class="links">
 
-						<!-- Link for User to create New Story-->
-						<li><a class="toStories" href="/">New Story</a></li>
-
-						<!-- Link for User's Archived List of Stories-->
-						<li><a class="toArchived" href="/archive">Archive</a></li>
-					</ul>  
-				</div>
-			</div>                
-		</div>
+	    <!-- Side Nav -->
+	    <div class="col s12 m4 l3">
+	      <ul id="slide-out" class="side-nav fixed blue-grey lighten-4">
+	        <!-- Link for User to create New Story-->
+	        <li><a id="toStories black-text" href="/story">New Story</a></li>
+	        <!-- Link for User's Archived List of Stories-->
+	        <li><a id="toArchived black-text" href="/"{{!--  role="button" --}}>Archive</a></li>
+	      </ul>
+	      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>  
+	    </div>  
 
 		<!-- Main Column -->
 		<div class="col s12 m8 l9">
@@ -84,6 +80,6 @@
 <!--Import Materialize--> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <!--Import js-->
-<script type="text/javascript" src="./assets/js/app.js"></script> 
+<script type="text/javascript" src="./assets/js/materialize.js"></script> 
 <script type="text/javascript" src="./assets/js/cms.js"></script> 
 </body>

@@ -48,7 +48,8 @@ $(document).ready(function() {
     var viewedPlots = [];
 
     //Array to hold plots and name of characters
-    var plots = [{
+    var plots = [
+        {
             plot: "Your main character is a man in his early forties, who is very foolish. The story begins on a social housing estate. A neighbour is involved in a love triangle. It's a story about a life or death decision. Your character realises no-one will listen to what s/he's saying.",
             name: "The name of your character is Graham"
         },

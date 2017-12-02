@@ -9,7 +9,7 @@
     <nav>
       <div class="nav-wrapper cyan darken-2">
         <a id="logo" class="brand-logo center white-text" href="/"><img id="logo-img" class="responsive-img" src="./assets/images/book.png"></a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse white-text"><i class="material-icons">person</i></a>
         <!-- Links show on desktop -->
         <ul class="right hide-on-med-and-down">
           <li><a class="white-text" id="logout" href="/" >Logout</a></li>  
@@ -20,23 +20,22 @@
   <!-- Navbar Links That Appear on Mobile Devices...outside of navbar-fixed to avoid nesting issues-->
   <div>
     <ul class="side-nav" id="mobile-demo">
-      <li><a class="white-text" id="logout" href="/" >Logout</a></li>
+      <li><a class="black-text" id="logout" href="/" >Logout</a></li>
     </ul>    
   </div>    
 
   <div class="row">
 
-    <!-- Side Bar Nav -->
-{{!--       {{#with loggedUser}}
---}}
-    <div class="col s12 m4 l3 valign-wrapper">
-          <ul>
-            <!-- Link for User to create New Story-->
-            <li><a class="toStories black-text" href="/story">New Story</a></li>
-            <!-- Link for User's Archived List of Stories-->
-            <li><a class="toArchived black-text" href="/archive">Archive</a></li>
-          </ul>           
-    </div>      
+    <!-- Side Nav -->
+    <div class="col s12 m4 l3">
+      <ul id="slide-out" class="side-nav fixed blue-grey lighten-4">
+        <!-- Link for User to create New Story-->
+        <li><a id="toStories black-text" href="/story">New Story</a></li>
+        <!-- Link for User's Archived List of Stories-->
+        <li><a id="toArchived black-text" href="/"{{!--  role="button" --}}>Archive</a></li>
+      </ul>
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>  
+    </div>     
 
     <!-- Main Column -->
     <div class="col s12 m8 l9">
@@ -50,9 +49,7 @@
       </div>
 
       <hr>
-      
-{{!--         {{/with}}       
---}}
+
       <!-- Urban Dictionary API -->
       <div class="row">
         <div class="col s12 urban-dictionary-container">
@@ -71,17 +68,17 @@
       <!-- table of currently active stories -->
       <div class="row">
         <div class="col s12">
-          {{#each userStoriesArray}}
+          {{#each stories}}
           {{!-- {{#unless archived}} --}}
           <div class="row">
             <div class="col s12 current-stories-container">
               <div class="card">
                 <div class="card-content">
                   <span class="card-title">{{this.storyName}}</span>
-                  <p><span class="first-story-post">{{this.post}}</span></p>
+                  <p><span class="first-story-post">{{this.firstPost}}</span></p>
                 </div>    
                 <div class="card-action">
-                  <a class="" href="">Post</a>
+                  <a id="post-selector" href="#" role="button" data-id="{{this.storyId}}">Post</a>
                 </div> 
               </div>   
             </div>
@@ -95,7 +92,7 @@
       <hr>
       
       <!-- popular stories -->
-      <div class="row">
+{{!--       <div class="row">
         <div class="col s12">
           {{#each allStoriesArray}}
           <div class="row">
@@ -111,7 +108,7 @@
               </div>   
             </div>
           </div> 
-          {{/each}}
+          {{/each}} --}}
           
         </div>
       </div>
@@ -124,8 +121,8 @@
 <!--Import Materialize--> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <!--Import js-->
-<script type="text/javascript" src="./assets/js/app.js"></script> 
+<script type="text/javascript" src="./assets/js/materialize.js"></script> 
 
-<script type="text/javascript" src="./assets/js/cms.js"></script>        
+<script type="text/javascript" src="./assets/js/cms.js"></script>           
 </body>
 </html>

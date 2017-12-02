@@ -44,50 +44,16 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-require("./routes/api-routes.js")(app);
-require("./routes/story-routes.js")(app);
-require("./routes/post-routes.js")(app);
 
 // Routes
 // =============================================================
-app.get("/", function(req, res) {
-    res.render("home");
-});
 
-app.get("/user", function(req, res) {
-    res.render("loggedInUserView", res);
-});
-
-app.get("/story", function(req, res) {
-    res.render("story");
-});
-
-app.get("/post", function(req, res) {
-    res.render("createPost");
-});
-
-app.get("/archive", function(req, res) {
-	res.render("post");
-});
-
-app.get("/cms", function(req, res) {
-	res.render("story");
-});
-
-app.get('/auth/facebook',
-  passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
 
 // Static directory
 app.use(express.static("public"));
 
-
+require("./routes/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
